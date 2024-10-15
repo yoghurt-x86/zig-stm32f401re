@@ -21,6 +21,6 @@ I can flash the board with:
 `sudo openocd -f $OPENOCD_PATH/share/openocd/scripts/board/st_nucleo_f4.cfg -c "init; reset halt; flash write_image erase build/cubemx.hex; reset run; exit"`
 
 
-So why does the cubemx version work but not the zig version? 
 
-
+If I adjust the MakeFile to use `zig cc` to compile it still works.
+However i don't know why the `zig build` doesn't work still. 

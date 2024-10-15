@@ -1,32 +1,14 @@
 const std = @import("std");
-const gatz = @import("stm32_hal").gatz;
 const newlib = @import("stm32_hal").newlib;
 
 pub fn build(b: *std.Build) void {
-    //const target = b.resolveTargetQuery(.{
-    //    .cpu_arch = .thumb,
-    //    .os_tag = .freestanding,
-    //    .abi = .eabihf,
-    //    .cpu_model = std.zig.CrossTarget.CpuModel{ .explicit = &std.Target.arm.cpu.cortex_m4 },
-    //    // Note that "fp_armv8d16sp" is the same instruction set as "fpv5-sp-d16", so LLVM only has the former
-    //    // https://github.com/llvm/llvm-project/issues/95053
-    //    .cpu_features_add = std.Target.arm.featureSet(&[_]std.Target.arm.Feature{std.Target.arm.Feature.fp_armv8d16sp}),
-    //});
-
-    const gatz_target = gatz.Target{
-        .cpu = gatz.cpu.@"cortex-m4",
-        .instruction_set = .thumb,
-        .endianness = .little,
-        .float_abi = .hard,
-        .fpu = gatz.fpu.@"fpv4-sp-d16",
-    };
-
-    const target_query = gatz_target.toTargetQuery() catch |err| {
-        std.log.err("Something is misconfigured, see: {any}\n", .{err});
-        unreachable;
-    };
-
-    const target = b.resolveTargetQuery(target_query);
+    const target = b.resolveTargetQuery(.{
+        .cpu_arch = .thumb,
+        .os_tag = .freestanding,
+        .abi = .eabihf,
+        .cpu_model = std.zig.CrossTarget.CpuModel{ .explicit = &std.Target.arm.cpu.cortex_m4 },
+        .cpu_features_add = std.Target.arm.featureSet(&[_]std.Target.arm.Feature{std.Target.arm.Feature.vfp4d16sp}),
+    });
 
     const executable_name = "blinky";
 

@@ -1,6 +1,5 @@
 const std = @import("std");
-pub const gatz = @import("gatz");
-pub const newlib = gatz.newlib;
+pub const newlib = @import("gatz").newlib;
 
 pub fn build(b: *std.Build) void {
     const target = b.standardTargetOptions(.{});
