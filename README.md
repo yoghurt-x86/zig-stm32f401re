@@ -1,5 +1,8 @@
 # Zig project for stm32f401re
 
+My attempt to follow this guide: https://github.com/haydenridd/stm32-zig-porting-guide
+To build zig for my nucleo-64 board. 
+
 Find the cubemx hal output in ./stm32_hal
 
 builds by running `zig build` 
