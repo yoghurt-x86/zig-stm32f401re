@@ -57,6 +57,7 @@ pub fn build(b: *std.Build) void {
     // Neccessary for HAL
     stm32_hal.defineCMacro("USE_HAL_DRIVER", null);
     stm32_hal.defineCMacro("STM32F401xE", null);
+    stm32_hal.defineCMacro("ZIG_MAIN", null);
 
     // Startup file
     stm32_hal.addAssemblyFile(b.path("startup_stm32f401xe.s"));

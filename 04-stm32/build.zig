@@ -44,6 +44,8 @@ pub fn build(b: *std.Build) void {
     blinky_exe.link_data_sections = true;
     blinky_exe.link_function_sections = true;
 
+    blinky_exe.setLinkerScriptPath(b.path("stm32_hal/STM32F401RETx_FLASH.ld"));
+
     // Produce .bin file from .elf
     const bin = b.addObjCopy(blinky_exe.getEmittedBin(), .{
         .format = .bin,
